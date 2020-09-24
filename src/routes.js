@@ -20,7 +20,6 @@ export default new VueRouter({
     { 
       path: '/contatos',
       component: Contatos,
-      name: 'contatos',
       alias: ['meus-contatos', 'lista-de-contatos'],//alias são caminhos alternativos, a rota pode ser acessada por qualquer um dos 3 paths
       children: [
         { path: 
@@ -40,15 +39,15 @@ export default new VueRouter({
         
         { path: '', 
           component: ContatosHome,
+          name: 'contatos'
         },
+
+        {
+          path: '*',
+          component: Erro404Contatos
+        }
           
       ],      
-    },
-    
-    {
-      //rota de erro específica para contatos
-      path: '/contatos*',
-      component: Erro404Contatos
     },
     
     {

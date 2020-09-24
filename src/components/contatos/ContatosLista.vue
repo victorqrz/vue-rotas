@@ -2,10 +2,22 @@
   <div>
     <h3 class="font-weight-light">Contatos</h3>
 
-    <ul class="list-group"  v-if="contatos.length > 0">
+    <div class="form-group">
+      <input 
+        type="search" 
+        class="form-control"
+        placeholder="Buscar contatos"
+        @keyup.enter="buscar"
+        :value="this.$route.query.busca"
+      >
+    </div>
+
+    <hr/>
+
+    <ul class="list-group" v-if="contatosFiltrados.length > 0">
       <ContatosListaIten 
         class="list-group-iten"
-        v-for="contato in contatos"
+        v-for="contato in contatosFiltrados"
         :key="contato.id"
         :contato="contato"
       />
@@ -33,9 +45,25 @@ export default {
       ]
     }
   },
+  computed: {
+    contatosFiltrados() {
+      const busca = this.$route.query.busca;
+      return ! busca ? this.contatos : this.contatos.filter(c => 
+          c.nome.toLowerCase()
+          .includes(busca.toLowerCase()))
+      
+    }
+  },   
   methods: {
     voltar() {
       this.$router.back() 
+    },
+    buscar(event) {
+      this.$router.push({
+        query: {
+          busca: event.target.value
+        }
+      })
     }
   }
 }
