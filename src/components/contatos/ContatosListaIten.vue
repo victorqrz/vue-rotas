@@ -6,7 +6,6 @@
       class="btn btn-info-btn-sm float-right">
         Detalhes
     </router-link>
-      
   </li>
 </template>
 
