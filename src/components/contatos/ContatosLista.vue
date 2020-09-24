@@ -2,7 +2,7 @@
   <div>
     <h3 class="font-weight-light">Contatos</h3>
 
-    <ul class="list-group" v-if="contatos.length > 0">
+    <ul class="list-group"  v-if="contatos.length > 0">
       <ContatosListaIten 
         class="list-group-iten"
         v-for="contato in contatos"
