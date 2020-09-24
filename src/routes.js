@@ -20,7 +20,11 @@ export default new VueRouter({
     { 
       path: '/contatos',
       component: Contatos,
-      alias: ['meus-contatos', 'lista-de-contatos'],//alias são caminhos alternativos, a rota pode ser acessada por qualquer um dos 3 paths
+      alias: ['meus-contatos', 'lista-de-contatos'],
+      props: (route) => {
+        const busca = route.query.busca;
+        return busca ? { busca } : {}
+      },
       children: [
         { path: 
           ':id', 
