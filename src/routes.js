@@ -6,6 +6,7 @@ import Contatos from './views/contatos/Contatos.vue'
 import ContatoDetalhes from './views/contatos/ContatoDetalhes.vue'
 import ContatosHome from './views/contatos/ContatosHome.vue'
 import ContatoEditar from './views/contatos/ContatoEditar.vue'
+import Erro404 from './views/Erro404.vue'
 
 
 Vue.use(VueRouter)
@@ -14,9 +15,12 @@ export default new VueRouter({
   mode: 'history',
   linkActiveClass: 'active',
   routes: [
+    { path: '/' ,component: Home},
     { 
       path: '/contatos',
       component: Contatos,
+      name: 'contatos',
+      alias: ['meus-contatos', 'lista-de-contatos'],//alias são caminhos alternativos, a rota pode ser acessada por qualquer um dos 3 paths
       children: [
         { path: 
           ':id', 
@@ -26,15 +30,23 @@ export default new VueRouter({
         
         { path: 
           ':id/editar',
+          alias:':id/alterar',
           components: {
             default: ContatoEditar,
             'contato-detalhes': ContatoDetalhes
           }
         },
         
-        { path: '', component: ContatosHome},
-      ]
+        { path: '', 
+          component: ContatosHome,
+        },
+          
+      ],      
     },
-    { path: '/' ,component: Home}
+    {
+      //rota de erro a nível global
+      path: '*',
+      component: Erro404
+    }
   ]
 })

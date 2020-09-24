@@ -2,7 +2,7 @@
   <li>
     <span>{{contato.nome}}</span>
     <router-link 
-      :to="{ name: 'contato', params: { id: contato.id } }"
+      :to="{ name: 'contato', params: { id: contato.id, name: contato.nome } }"
       class="btn btn-info-btn-sm float-right">
         Detalhes
     </router-link>
