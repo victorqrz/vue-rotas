@@ -25,7 +25,8 @@ export default new VueRouter({
         { path: 
           ':id', 
           component: ContatoDetalhes,
-          name: 'contato'
+          name: 'contato',
+          props: true
         },
         
         { path: 
@@ -34,6 +35,10 @@ export default new VueRouter({
           components: {
             default: ContatoEditar,
             'contato-detalhes': ContatoDetalhes
+          },
+          props: {
+            default: true,
+            'contato-detalhes': true
           }
         },
         
