@@ -7,6 +7,7 @@ import ContatoDetalhes from './views/contatos/ContatoDetalhes.vue'
 import ContatosHome from './views/contatos/ContatosHome.vue'
 import ContatoEditar from './views/contatos/ContatoEditar.vue'
 import Erro404 from './views/Erro404.vue'
+import Erro404Contatos from './views/contatos/Erro404Contatos.vue'
 
 
 Vue.use(VueRouter)
@@ -43,6 +44,13 @@ export default new VueRouter({
           
       ],      
     },
+    
+    {
+      //rota de erro específica para contatos
+      path: '/contatos*',
+      component: Erro404Contatos
+    },
+    
     {
       //rota de erro a nível global
       path: '*',
