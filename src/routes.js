@@ -8,41 +8,50 @@ import ContatosHome from './views/contatos/ContatosHome.vue'
 import ContatoEditar from './views/contatos/ContatoEditar.vue'
 import Erro404 from './views/Erro404.vue'
 import Erro404Contatos from './views/contatos/Erro404Contatos.vue'
+import Login from './views/login/Login.vue'
 
+import EventBus from './event-bus'
 
 Vue.use(VueRouter)
 
-export default new VueRouter({
+const extrairParametroId = route => ({
+    id: +route.params.id
+  });
+
+const router = new VueRouter({
   mode: 'history',
   linkActiveClass: 'active',
   routes: [
     { path: '/' ,component: Home},
+    { path: '/login', component: Login},
     { 
       path: '/contatos',
       component: Contatos,
-      alias: ['meus-contatos', 'lista-de-contatos'],
       props: (route) => {
         const busca = route.query.busca;
         return busca ? { busca } : {}
       },
       children: [
         { path: 
-          ':id', 
+          ':id(\\d+)', //expressão regular para verificar se realmente é um Number
           component: ContatoDetalhes,
           name: 'contato',
-          props: true
+          props:extrairParametroId 
         },
         
         { path: 
-          ':id/editar',
-          alias:':id/alterar',
+          ':id(\\d+)/editar',
+          alias:':id(\\d+)/alterar',
+          meta: {
+            requerAutenticacao: true
+          },
           components: {
             default: ContatoEditar,
             'contato-detalhes': ContatoDetalhes
           },
           props: {
-            default: true,
-            'contato-detalhes': true
+            default: extrairParametroId,
+            'contato-detalhes': extrairParametroId
           }
         },
         
@@ -66,3 +75,19 @@ export default new VueRouter({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  const estaAutenticado = EventBus.autenticado
+  if (to.matched.some(rota => rota.meta.requerAutenticacao)) {
+    if (!estaAutenticado) {
+      next({
+        path: '/login',
+        query: { redirecionar: to.fullPath }
+      })
+      return
+    }
+  }
+  next()
+})
+
+export default router;
