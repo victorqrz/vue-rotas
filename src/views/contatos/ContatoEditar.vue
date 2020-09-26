@@ -12,6 +12,10 @@
 
 <script>
 export default {
-  props: ['id']
+  props: ['id'],
+  beforeRouteLeave(to, from, next) {
+    const confirmar = window.confirm('Deseja realmente sair ?')
+    next(confirmar)
+  }
 }
 </script>
