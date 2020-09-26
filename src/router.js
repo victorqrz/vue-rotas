@@ -1,16 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Home from './views/Home.vue'
-import Contatos from './views/contatos/Contatos.vue'
-import ContatoDetalhes from './views/contatos/ContatoDetalhes.vue'
-import ContatosHome from './views/contatos/ContatosHome.vue'
-import ContatoEditar from './views/contatos/ContatoEditar.vue'
 import Erro404 from './views/Erro404.vue'
 import Erro404Contatos from './views/contatos/Erro404Contatos.vue'
 import Login from './views/login/Login.vue'
 
 import EventBus from './event-bus'
+
+const Home = () => import('./views/Home.vue');
+const Contatos = () => import('./views/contatos/Contatos.vue');
+const ContatosHome = () => import('./views/contatos/ContatosHome.vue');
+const ContatoDetalhes = () => import('./views/contatos/ContatoDetalhes.vue');
+const ContatoEditar = () => import('./views/contatos/ContatoEditar.vue');
 
 Vue.use(VueRouter)
 
@@ -22,7 +23,7 @@ const router = new VueRouter({
   mode: 'history',
   linkActiveClass: 'active',
   routes: [
-    { path: '/' ,component: Home},
+    { path: '/' , component: Home},
     { path: '/login', component: Login},
     { 
       path: '/contatos',
