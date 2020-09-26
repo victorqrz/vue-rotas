@@ -8,10 +8,10 @@ import Login from './views/login/Login.vue'
 import EventBus from './event-bus'
 
 const Home = () => import('./views/Home.vue');
-const Contatos = () => import('./views/contatos/Contatos.vue');
-const ContatosHome = () => import('./views/contatos/ContatosHome.vue');
-const ContatoDetalhes = () => import('./views/contatos/ContatoDetalhes.vue');
-const ContatoEditar = () => import('./views/contatos/ContatoEditar.vue');
+const Contatos = () => import(/* webpackChunkName: "contatos" */'./views/contatos/Contatos.vue');
+const ContatosHome = () => import(/* webpackChunkName: "contatos" */'./views/contatos/ContatosHome.vue');
+const ContatoDetalhes = () => import(/* webpackChunkName: "contatos" */'./views/contatos/ContatoDetalhes.vue');
+const ContatoEditar = () => import(/* webpackChunkName: "contatos" */'./views/contatos/ContatoEditar.vue');
 
 Vue.use(VueRouter)
 
