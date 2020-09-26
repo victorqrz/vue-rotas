@@ -25,8 +25,23 @@
         Contatos
       </router-link>
 
-      <router-view></router-view>
+      <transition name="slide" mode="out-in">
+        <router-view></router-view>
+      </transition>
     </div>
 
   </div>
 </template>
+
+<style scoped>
+
+  .slide-enter, .slide-leave-to{
+    transition: translateX(-50px);
+    opacity: 0;
+  }
+
+  .slide-enter-active, .slide-leave-active {
+    transition: all 0.2s;
+  }
+
+</style>
