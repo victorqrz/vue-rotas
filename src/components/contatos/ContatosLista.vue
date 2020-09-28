@@ -30,8 +30,8 @@
 </template>
 
 <script>
-import ContatosListaIten from './ContatosListaIten.vue'
 
+import ContatosListaIten from './ContatosListaIten.vue'
 import EventBus from '@/event-bus.js'
 
 export default {
@@ -44,28 +44,31 @@ export default {
       contatos: []
     }
   },
+  //meu
   computed: {
     contatosFiltrados() {
-      const busca = this.busca;
-      return ! busca ? this.contatos : this.contatos.filter(c => 
+      const busca = this.busca
+      return !busca 
+        ? this.contatos 
+        : this.contatos.filter(c => 
           c.nome.toLowerCase()
           .includes(busca.toLowerCase()))
-      
     }
   },  
   created() {
     this.contatos = EventBus.contatos;
   }, 
   methods: {
-    voltar() {
-      this.$router.back() 
-    },
     buscar(event) {
       this.$router.push({
+        path: '/contatos',
         query: {
           busca: event.target.value
         }
       })
+    },
+    voltar() {
+      this.$router.back() 
     }
   }
 }

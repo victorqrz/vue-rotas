@@ -28,10 +28,6 @@ const router = new VueRouter({
     { 
       path: '/contatos',
       component: Contatos,
-      props: (route) => {
-        const busca = route.query.busca;
-        return busca ? { busca } : {}
-      },
       children: [
         { path: 
           ':id(\\d+)', //expressão regular para verificar se realmente é um Number
@@ -58,7 +54,11 @@ const router = new VueRouter({
         
         { path: '', 
           component: ContatosHome,
-          name: 'contatos'
+          name: 'contatos',
+          props: (route) => {
+            const busca = route.query.busca
+            return busca ? { busca } : {}
+          },
         },
 
         {
